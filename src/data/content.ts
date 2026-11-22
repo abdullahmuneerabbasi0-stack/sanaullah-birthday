@@ -11,8 +11,8 @@
 
 export const content = {
   friendName: 'Sanaullah',
-  /** ✏️ PLACEHOLDER: your name, used in the letter signature and footer */
-  yourName: 'Your Name',
+  /** Your name, used in the letter signature and footer */
+  yourName: 'Abdullah',
 
   /** Birthday moment, in Asia/Karachi time (UTC+5). */
   birthdayISO: '2026-11-23T00:00:00+05:00',
@@ -181,8 +181,10 @@ Happy birthday! I wanted to make you something a little different this year, som
 Thank you for every laugh, every late night, every time you picked up the phone. You make the good days better and the hard days lighter, and I don’t say that enough.
 
 I hope this year is kind to you, and full of the things that make you happiest. Whatever comes next, I’ll be right here, probably laughing at your jokes before you finish them.`,
-    /** ✏️ PLACEHOLDER ending line, shown after the letter */
-    ending: 'Check your door 👀',
+    /** Button shown after the letter; tapping it reveals `surpriseImage`.
+     *  Leave surpriseImage '' to show the label as plain text instead. */
+    ending: 'A surprise gift 🎁',
+    surpriseImage: 'photos/surprise.png',
     /** Optional YouTube video id (the part after v=). Leave '' for none. */
     youtubeId: '',
     signOff: 'With love,',

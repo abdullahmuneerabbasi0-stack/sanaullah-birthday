@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { content } from '../data/content'
+import { asset, content } from '../data/content'
 import { sprinkle } from '../hooks/confetti'
 import { SectionHeader } from './ui'
 
@@ -90,12 +90,13 @@ export default function Finale() {
                     </div>
                   )}
                   {f.ending && (
-                    <motion.p
-                      initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.8, type: 'spring' }}
-                      className="mt-10 rounded-2xl bg-plum px-6 py-5 text-center font-hand text-4xl text-gold-300"
-                    >
-                      {f.ending}
-                    </motion.p>
+                    <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.8, type: 'spring' }} className="mt-10">
+                      {f.surpriseImage ? (
+                        <SurpriseButton label={f.ending} image={f.surpriseImage} />
+                      ) : (
+                        <p className="rounded-2xl bg-plum px-6 py-5 text-center font-hand text-4xl text-gold-300">{f.ending}</p>
+                      )}
+                    </motion.div>
                   )}
                 </motion.div>
               )}
@@ -105,5 +106,33 @@ export default function Finale() {
         )}
       </AnimatePresence>
     </section>
+  )
+}
+
+function SurpriseButton({ label, image }: { label: string; image: string }) {
+  const [shown, setShown] = useState(false)
+  return (
+    <AnimatePresence mode="wait">
+      {!shown ? (
+        <motion.button
+          key="btn"
+          onClick={(e) => { e.stopPropagation(); setShown(true); sprinkle() }}
+          exit={{ scale: 0.6, opacity: 0 }}
+          className="animate-glow w-full min-h-[64px] rounded-2xl bg-plum px-6 py-5 text-center font-hand text-4xl text-gold-300 transition-transform active:scale-95"
+        >
+          {label}
+        </motion.button>
+      ) : (
+        <motion.img
+          key="img"
+          src={asset(image)}
+          alt="Your surprise"
+          initial={{ scale: 0.3, rotate: -12, opacity: 0 }}
+          animate={{ scale: 1, rotate: 0, opacity: 1 }}
+          transition={{ type: 'spring', stiffness: 220, damping: 14 }}
+          className="mx-auto w-full max-w-xs rounded-xl shadow-paper"
+        />
+      )}
+    </AnimatePresence>
   )
 }
