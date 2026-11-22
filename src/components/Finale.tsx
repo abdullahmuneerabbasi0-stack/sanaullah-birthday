@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { asset, content } from '../data/content'
+import { content } from '../data/content'
 import { sprinkle } from '../hooks/confetti'
 import { SectionHeader } from './ui'
 
@@ -92,7 +92,7 @@ export default function Finale() {
                   {f.ending && (
                     <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.8, type: 'spring' }} className="mt-10">
                       {f.surpriseImage ? (
-                        <SurpriseButton label={f.ending} image={f.surpriseImage} />
+                        <SurpriseButton label={f.ending} />
                       ) : (
                         <p className="rounded-2xl bg-plum px-6 py-5 text-center font-hand text-4xl text-gold-300">{f.ending}</p>
                       )}
@@ -109,30 +109,14 @@ export default function Finale() {
   )
 }
 
-function SurpriseButton({ label, image }: { label: string; image: string }) {
-  const [shown, setShown] = useState(false)
+/** Opens the surprise on its own page (public/surprise.html). */
+function SurpriseButton({ label }: { label: string }) {
   return (
-    <AnimatePresence mode="wait">
-      {!shown ? (
-        <motion.button
-          key="btn"
-          onClick={(e) => { e.stopPropagation(); setShown(true); sprinkle() }}
-          exit={{ scale: 0.6, opacity: 0 }}
-          className="animate-glow w-full min-h-[64px] rounded-2xl bg-plum px-6 py-5 text-center font-hand text-4xl text-gold-300 transition-transform active:scale-95"
-        >
-          {label}
-        </motion.button>
-      ) : (
-        <motion.img
-          key="img"
-          src={asset(image)}
-          alt="Your surprise"
-          initial={{ scale: 0.3, rotate: -12, opacity: 0 }}
-          animate={{ scale: 1, rotate: 0, opacity: 1 }}
-          transition={{ type: 'spring', stiffness: 220, damping: 14 }}
-          className="mx-auto w-full max-w-xs rounded-xl shadow-paper"
-        />
-      )}
-    </AnimatePresence>
+    <a
+      href={`${import.meta.env.BASE_URL}surprise.html`}
+      className="animate-glow flex w-full min-h-[64px] items-center justify-center rounded-2xl bg-plum px-6 py-5 text-center font-hand text-4xl text-gold-300 transition-transform active:scale-95"
+    >
+      {label}
+    </a>
   )
 }
