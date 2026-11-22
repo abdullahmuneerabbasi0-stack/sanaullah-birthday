@@ -30,9 +30,9 @@ export const content = {
     photo: 'photos/hero-01.webp',
   },
 
-  /** Background music playlist (plays in order, then loops). Files live in
-   *  /public/music/. Starts when he taps "open your gift"; the floating button pauses it.
-   *  Use [] for no music. */
+  /** Background music. Starts 3 seconds after he taps "open your gift".
+   *  Each track plays once in order; the LAST track then repeats forever.
+   *  Files live in /public/music/. Use [] for no music. */
   music: ['music/track-1.mp3', 'music/track-2.mp3'] as string[],
 
   timeline: {
