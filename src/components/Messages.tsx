@@ -44,7 +44,7 @@ function Note({ m, i }: { m: Msg; i: number }) {
         viewport={{ once: true, margin: '-10% 0px' }}
         transition={{ type: 'spring', stiffness: 180, damping: 9, mass: 0.8, delay: (i % 3) * 0.12, opacity: { duration: 0.3 } }}
         style={{ transformOrigin: '50% 6%' }}
-        className={`relative min-h-[11.5rem] bg-gradient-to-br p-6 pt-9 ${notes[i % notes.length]}`}
+        className={`relative min-h-[11.5rem] bg-gradient-to-br p-6 pt-9 [backface-visibility:hidden] [outline:1px_solid_transparent] ${notes[i % notes.length]}`}
       >
         <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[0_1px_2px_rgba(74,29,63,.08),0_6px_10px_-6px_rgba(74,29,63,.2),0_22px_32px_-18px_rgba(74,29,63,.45)]" />
         {/* soft fold highlight */}

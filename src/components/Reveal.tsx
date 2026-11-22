@@ -78,7 +78,7 @@ export default function Reveal({ start = 0.2 }: { start?: number }) {
               src={asset(content.reveal.photo)}
               alt={content.friendName}
               fetchPriority="high"
-              className="h-48 w-40 rounded-[1.25rem] object-cover object-top sm:h-64 sm:w-52"
+              className="h-48 w-40 rounded-[1.25rem] object-cover object-top sm:h-56 sm:w-44 xl:h-64 xl:w-52"
             />
             <motion.span
               aria-hidden className="absolute -right-3 -top-3 text-2xl"
@@ -97,7 +97,7 @@ export default function Reveal({ start = 0.2 }: { start?: number }) {
         </h1>
         <motion.p
           initial={{ opacity: 0, y: 14, filter: 'blur(6px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ delay: reduce ? start : total + 0.15, duration: 0.9 }}
-          className="relative mt-6 max-w-sm text-[17px] leading-relaxed text-plum-500"
+          className="relative mt-6 max-w-sm text-balance text-[17px] leading-relaxed text-plum-500 sm:max-w-md"
         >
           {content.reveal.subtitle}
         </motion.p>

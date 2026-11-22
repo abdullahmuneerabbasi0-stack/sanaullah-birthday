@@ -50,7 +50,7 @@ export function SectionHeader({ index, title, subtitle }: { index?: number; titl
         </motion.div>
       )}
       <motion.h2 variants={rise} className="section-title">{title}</motion.h2>
-      {subtitle && <motion.p variants={rise} className="section-sub">{subtitle}</motion.p>}
+      {subtitle && <motion.p variants={rise} className="section-sub text-balance">{subtitle}</motion.p>}
     </motion.header>
   )
 }
