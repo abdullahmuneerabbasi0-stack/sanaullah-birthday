@@ -161,13 +161,12 @@ export const content = {
     title: 'Notes from your people',
     subtitle: 'Some people who wanted to say something.',
     list: [
-      // ✏️ PLACEHOLDER messages from friends
-      { name: 'Ali', message: 'Happy birthday bro! Here’s to more late nights and bad decisions. 🎉' },
-      { name: 'Hamza', message: 'You’re one of the realest people I know. Have the best year.' },
-      { name: 'Ayesha', message: 'Wishing you all the happiness in the world, you deserve every bit.' },
-      { name: 'Usman', message: 'Still waiting for you to return my charger. Happy birthday though ❤️' },
-      { name: 'Fatima', message: 'May this year bring you everything you’ve been praying for.' },
-      { name: 'Bilal', message: 'Older, wiser… well, older at least. Love you man!' },
+      // ✏️ PLACEHOLDER messages: names are real, swap in their own words when you have them
+      { name: 'Owais', message: 'Happy birthday yaar! Here’s to more late nights and bad decisions. 🎉' },
+      { name: 'Saqlain', message: 'You’re one of the realest people I know. Have the best year.' },
+      { name: 'Asif', message: 'Wishing you all the happiness in the world, you deserve every bit.' },
+      { name: 'Rahman', message: 'Still waiting for you to return my charger. Happy birthday though ❤️' },
+      { name: 'Hamza', message: 'Older, wiser… well, older at least. Love you bhai!' },
     ],
   },
 
