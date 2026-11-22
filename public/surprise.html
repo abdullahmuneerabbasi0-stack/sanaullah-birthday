@@ -57,8 +57,8 @@
       }
       btn.addEventListener('click', () => { play().catch(() => {}) })
       sfx.addEventListener('play', () => { btn.hidden = false; btn.textContent = '🔊 Play again'; btn.classList.remove('nudge') })
-      // tiny delay so it lands with the pop-in animation
-      setTimeout(() => { play().catch(blocked) }, 250)
+      // start 3 seconds after the page appears
+      setTimeout(() => { play().catch(blocked) }, 3000)
     </script>
   </body>
 </html>
