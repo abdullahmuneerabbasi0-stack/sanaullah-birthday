@@ -56,9 +56,11 @@
         document.addEventListener('pointerdown', unlock, true)
       }
       btn.addEventListener('click', () => { play().catch(() => {}) })
+      // repeat with a 1.5s gap between plays
+      sfx.addEventListener('ended', () => { setTimeout(() => { sfx.play().catch(() => {}) }, 1500) })
       sfx.addEventListener('play', () => { btn.hidden = false; btn.textContent = '🔊 Play again'; btn.classList.remove('nudge') })
-      // start 3 seconds after the page appears
-      setTimeout(() => { play().catch(blocked) }, 3000)
+      // start 2 seconds after the page appears
+      setTimeout(() => { play().catch(blocked) }, 2000)
     </script>
   </body>
 </html>

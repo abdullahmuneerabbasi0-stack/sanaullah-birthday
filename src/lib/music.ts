@@ -17,6 +17,13 @@ let index = 0
 let userPaused = false
 let retryArmed = false
 let startTimer = 0
+let mode: 'playlist' | 'surprise' = 'playlist'
+let saved = { index: 0, time: 0, playing: false }
+let gapTimer = 0
+/** Surprise sound: starts this long after the surprise opens, then repeats with GAP between plays. */
+const SURPRISE_SRC = 'music/surprise.mp3'
+const SURPRISE_DELAY = 2000
+const SURPRISE_GAP = 1500
 const listeners = new Set<(playing: boolean) => void>()
 
 function emit() { const p = isPlaying(); listeners.forEach((l) => l(p)) }
@@ -37,6 +44,11 @@ function el() {
   audio.addEventListener('play', emit)
   audio.addEventListener('pause', emit)
   audio.addEventListener('ended', () => {
+    if (mode === 'surprise') {
+      clearTimeout(gapTimer)
+      gapTimer = window.setTimeout(() => { if (mode === 'surprise') audio!.play().catch(emit) }, SURPRISE_GAP)
+      return
+    }
     if (index >= last) return // last track loops natively
     setTrack(index + 1)
     audio!.play().catch(emit)
@@ -96,6 +108,42 @@ export function playMusic() {
 }
 export function pauseMusic() { userPaused = true; clearTimeout(startTimer); audio?.pause() }
 export function toggleMusic() { if (isPlaying()) pauseMusic(); else playMusic() }
+
+/**
+ * Call directly inside the "A surprise gift" tap. Reuses the already-unlocked player so
+ * phones allow the sound to start by itself 3s later (muted play now, unmute later).
+ */
+export function startSurprise() {
+  const a = el()
+  saved = { index, time: a.currentTime, playing: !a.paused && !a.muted }
+  mode = 'surprise'
+  clearTimeout(startTimer); clearTimeout(gapTimer)
+  a.pause()
+  a.loop = false
+  a.src = asset(SURPRISE_SRC)
+  a.muted = true
+  a.play()?.catch(() => { emit(); armRetry() })
+  startTimer = window.setTimeout(() => {
+    if (mode !== 'surprise') return
+    a.currentTime = 0
+    a.muted = false
+    if (a.paused) a.play().catch(armRetry)
+  }, SURPRISE_DELAY)
+}
+
+/** Leave the surprise and pick the birthday playlist back up where it was. */
+export function stopSurprise() {
+  if (mode !== 'surprise') return
+  mode = 'playlist'
+  clearTimeout(startTimer); clearTimeout(gapTimer)
+  const a = el()
+  a.pause()
+  a.muted = false
+  setTrack(saved.index)
+  const resume = () => { try { a.currentTime = saved.time } catch { /* not seekable yet */ } }
+  a.addEventListener('loadedmetadata', resume, { once: true })
+  if (saved.playing && !userPaused) a.play().catch(emit)
+}
 
 export function onMusicChange(fn: (playing: boolean) => void) {
   listeners.add(fn)

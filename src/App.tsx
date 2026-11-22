@@ -13,6 +13,7 @@ import Quiz from './components/Quiz'
 import Reasons from './components/Reasons'
 import Reveal from './components/Reveal'
 import ScrollProgress from './components/ScrollProgress'
+import SurpriseView from './components/SurpriseView'
 import Timeline from './components/Timeline'
 import { burst } from './hooks/confetti'
 import { primeMusic, startMusicDelayed } from './lib/music'
@@ -66,6 +67,7 @@ export default function App() {
           </main>
           <Footer onReplay={replay} />
           <MusicToggle />
+          <SurpriseView />
         </>
       )}
     </>

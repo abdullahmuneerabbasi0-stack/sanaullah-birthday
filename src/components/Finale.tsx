@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { content } from '../data/content'
 import { sprinkle } from '../hooks/confetti'
+import { openSurprise } from '../lib/surprise'
 import { SectionHeader, ease } from './ui'
 
 function useTypewriter(text: string, run: boolean, speed = 28) {
@@ -169,11 +170,12 @@ export default function Finale() {
   )
 }
 
-/** Opens the surprise on its own page (public/surprise.html). */
+/** Opens the surprise page (in-app, so its sound can start by itself). */
 function SurpriseButton({ label }: { label: string }) {
   return (
     <a
       href={`${import.meta.env.BASE_URL}surprise.html`}
+      onClick={(e) => { e.preventDefault(); openSurprise() }}
       className="press animate-glow group relative flex min-h-[64px] w-full items-center justify-center overflow-hidden rounded-2xl px-6 py-5 text-center font-hand text-4xl text-gold-300"
       style={{ background: 'linear-gradient(180deg,#6A3260,#4A1D3F)' }}
     >
