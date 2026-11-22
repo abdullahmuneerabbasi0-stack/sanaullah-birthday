@@ -30,9 +30,9 @@ export const content = {
     photo: 'photos/hero-01.webp',
   },
 
-  /** Optional background music. Put an mp3 in /public/music/ and set the
-   *  path, e.g. 'music/song.mp3'. Leave '' to hide the music button. */
-  music: '',
+  /** Background music playlist (plays in order, then loops). Files live in
+   *  /public/music/. Use [] to hide the music button. Never autoplays. */
+  music: ['music/track-1.mp3', 'music/track-2.mp3'] as string[],
 
   timeline: {
     title: 'Our story',

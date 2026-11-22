@@ -2,12 +2,20 @@ import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { asset, content } from '../data/content'
 
-/** Floating music button with equaliser bars. Only ever plays after a tap (never autoplays). */
+/** Floating music button with equaliser bars. Plays the playlist in order and loops.
+ *  Only ever plays after a tap (never autoplays). */
 export default function MusicToggle() {
   const ref = useRef<HTMLAudioElement>(null)
   const [playing, setPlaying] = useState(false)
+  const [track, setTrack] = useState(0)
+  const tracks = content.music
   useEffect(() => () => ref.current?.pause(), [])
-  if (!content.music) return null
+  // when a track ends, move to the next one (wrapping round) and keep playing
+  useEffect(() => {
+    const a = ref.current
+    if (a && playing) a.play().catch(() => setPlaying(false))
+  }, [track]) // eslint-disable-line react-hooks/exhaustive-deps
+  if (!tracks.length) return null
 
   const toggle = async () => {
     const a = ref.current
@@ -17,7 +25,13 @@ export default function MusicToggle() {
   }
   return (
     <>
-      <audio ref={ref} src={asset(content.music)} loop preload="none" />
+      <audio
+        ref={ref}
+        src={asset(tracks[track])}
+        loop={tracks.length === 1}
+        preload="none"
+        onEnded={() => setTrack((t) => (t + 1) % tracks.length)}
+      />
       <motion.button
         initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 2.5, type: 'spring', stiffness: 300, damping: 18 }}
         whileTap={{ scale: 0.9 }}
