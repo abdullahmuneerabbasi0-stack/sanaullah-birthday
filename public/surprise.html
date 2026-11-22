@@ -20,12 +20,45 @@
         color: #FFFBF3; text-decoration: none; font-weight: 600; padding: 14px 24px; min-height: 48px; box-sizing: border-box;
         border: 2px solid rgba(255,251,243,.7); border-radius: 999px;
       }
+      .sound {
+        display: inline-flex; align-items: center; gap: 8px; background: rgba(36,9,30,.35); color: #FFFBF3;
+        border: 0; font: 600 15px system-ui, sans-serif; padding: 12px 20px; min-height: 48px; border-radius: 999px;
+        cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform .2s;
+      }
+      .sound:active { transform: scale(.95); }
+      .sound.nudge { animation: nudge 1.2s ease-in-out infinite; }
+      @keyframes nudge { 0%,100% { transform: scale(1) } 50% { transform: scale(1.08) } }
       @keyframes pop { from { transform: scale(.3) rotate(-12deg); opacity: 0 } to { transform: none; opacity: 1 } }
       @media (prefers-reduced-motion: reduce) { img { animation: none } }
     </style>
   </head>
   <body>
     <img src="photos/surprise.png" alt="Your surprise gift" />
+    <button class="sound" id="sound" type="button" hidden>🔊 Play again</button>
     <a href="./?preview=1">← Back to your birthday page</a>
+    <audio id="sfx" src="music/surprise.mp3" preload="auto"></audio>
+    <script>
+      // Try to play straight away. Phones that block sound until a tap on this page
+      // get a "Tap for sound" button, and any tap anywhere starts it.
+      const sfx = document.getElementById('sfx')
+      const btn = document.getElementById('sound')
+      const play = () => { sfx.currentTime = 0; return sfx.play() }
+      const blocked = () => {
+        btn.hidden = false
+        btn.textContent = '🔊 Tap for sound'
+        btn.classList.add('nudge')
+        const unlock = () => {
+          document.removeEventListener('pointerdown', unlock, true)
+          btn.textContent = '🔊 Play again'
+          btn.classList.remove('nudge')
+          play().catch(() => {})
+        }
+        document.addEventListener('pointerdown', unlock, true)
+      }
+      btn.addEventListener('click', () => { play().catch(() => {}) })
+      sfx.addEventListener('play', () => { btn.hidden = false; btn.textContent = '🔊 Play again'; btn.classList.remove('nudge') })
+      // tiny delay so it lands with the pop-in animation
+      setTimeout(() => { play().catch(blocked) }, 250)
+    </script>
   </body>
 </html>
