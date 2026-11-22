@@ -31,7 +31,8 @@ export const content = {
   },
 
   /** Background music playlist (plays in order, then loops). Files live in
-   *  /public/music/. Use [] to hide the music button. Never autoplays. */
+   *  /public/music/. Starts when he taps "open your gift"; the floating button pauses it.
+   *  Use [] for no music. */
   music: ['music/track-1.mp3', 'music/track-2.mp3'] as string[],
 
   timeline: {
