@@ -15,7 +15,7 @@ import Reveal from './components/Reveal'
 import ScrollProgress from './components/ScrollProgress'
 import Timeline from './components/Timeline'
 import { burst } from './hooks/confetti'
-import { playMusic } from './lib/music'
+import { playMusic, primeMusic } from './lib/music'
 import { scrollToTop, startSmoothScroll } from './lib/smooth'
 
 type Stage = 'loading' | 'gate' | 'open'
@@ -26,7 +26,7 @@ export default function App() {
   const [revealKey, setRevealKey] = useState(0)
   const [curtain, setCurtain] = useState(false)
 
-  const loaded = useCallback(() => setStage('gate'), [])
+  const loaded = useCallback(() => { setStage('gate'); primeMusic() }, [])
 
   const open = () => {
     playMusic() // must run inside the tap itself so phones allow the audio

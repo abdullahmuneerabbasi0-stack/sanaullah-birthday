@@ -31,13 +31,38 @@ function el() {
 export const hasMusic = () => tracks.length > 0
 export const isPlaying = () => !!audio && !audio.paused
 
+let userPaused = false
+let retryArmed = false
+
+/** If the browser refused to start (e.g. strict autoplay rules), try again on the next tap anywhere. */
+function armRetry() {
+  if (retryArmed) return
+  retryArmed = true
+  const retry = () => {
+    window.removeEventListener('pointerdown', retry, true)
+    window.removeEventListener('touchend', retry, true)
+    window.removeEventListener('keydown', retry, true)
+    retryArmed = false
+    if (!userPaused && !isPlaying()) el().play().catch(armRetry)
+  }
+  window.addEventListener('pointerdown', retry, true)
+  window.addEventListener('touchend', retry, true)
+  window.addEventListener('keydown', retry, true)
+}
+
+/** Create the player and start buffering the first track early (no sound). */
+export function primeMusic() { if (hasMusic()) el().load() }
+
 /** Call directly inside a click/tap handler. */
 export function playMusic() {
   if (!hasMusic()) return
-  el().play().catch(emit)
+  userPaused = false
+  const p = el().play()
+  p?.catch(() => { emit(); armRetry() })
 }
-export function pauseMusic() { audio?.pause() }
+export function pauseMusic() { userPaused = true; audio?.pause() }
 export function toggleMusic() { if (isPlaying()) pauseMusic(); else playMusic() }
+export const musicError = () => audio?.error?.code ?? null
 
 export function onMusicChange(fn: (playing: boolean) => void) {
   listeners.add(fn)
