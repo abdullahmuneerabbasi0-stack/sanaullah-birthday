@@ -10,8 +10,8 @@ export default {
         blush: '#F2C9C4',
       },
       fontFamily: {
-        hand: ['Caveat', 'cursive'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        hand: ['Caveat', 'Caveat Fallback', 'cursive'],
+        sans: ['Inter', 'Inter Fallback', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         paper: '0 1px 2px rgba(74,29,63,.08), 0 8px 24px -8px rgba(74,29,63,.25)',
