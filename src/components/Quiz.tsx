@@ -93,7 +93,8 @@ export default function Quiz() {
                       }
                       transition={isWrong ? { duration: 0.45 } : isRight ? { duration: 0.4 } : { delay: picked === null ? 0.08 * o + 0.15 : 0, duration: 0.35 }}
                       disabled={picked !== null}
-                      className={`press relative flex min-h-[54px] items-center justify-between overflow-visible rounded-2xl border px-5 py-3 text-left text-[16px] font-medium transition-colors duration-300
+                      whileTap={picked === null ? { scale: 0.97 } : undefined}
+                      className={`relative flex min-h-[54px] items-center justify-between overflow-visible rounded-2xl border px-5 py-3 text-left text-[16px] font-medium transition-[background-color,border-color,color] duration-300
                         ${isRight ? 'border-emerald-600/40 bg-emerald-50 text-emerald-900' : ''}
                         ${isWrong ? 'border-rose-500/40 bg-rose-50 text-rose-900' : ''}
                         ${!isRight && !isWrong ? 'border-plum/[.12] bg-white/80 text-plum enabled:hover:border-gold enabled:hover:bg-white' : ''}`}

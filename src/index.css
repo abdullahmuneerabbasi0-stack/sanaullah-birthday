@@ -109,3 +109,8 @@
 @media (pointer: fine) {
   html.has-cursor, html.has-cursor * { cursor: none !important; }
 }
+
+@keyframes caret { 0%, 49% { opacity: 1 } 50%, 100% { opacity: 0 } }
+.caret { animation: caret 1s steps(1) infinite; }
+@keyframes sheen { 0% { transform: translateX(0) skewX(-20deg) } 60%, 100% { transform: translateX(450%) skewX(-20deg) } }
+.sheen { animation: sheen 3.2s ease-in-out infinite; }

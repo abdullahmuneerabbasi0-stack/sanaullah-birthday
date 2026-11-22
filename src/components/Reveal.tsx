@@ -107,7 +107,7 @@ export default function Reveal({ start = 0.2 }: { start?: number }) {
       <motion.a
         href="#story"
         initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reduce ? start : total + 0.9, duration: 0.8 }}
-        className="press absolute bottom-[max(1.25rem,env(safe-area-inset-bottom))] flex min-h-[48px] flex-col items-center justify-center gap-1.5 px-4 font-hand text-2xl text-plum-500"
+        className="absolute bottom-[max(1.25rem,env(safe-area-inset-bottom))] flex min-h-[48px] flex-col items-center justify-center gap-1.5 px-4 font-hand text-2xl text-plum-500"
       >
         {content.reveal.scrollHint}
         <span aria-hidden className="relative flex h-8 w-5 justify-center rounded-full border-[1.5px] border-plum/30">
