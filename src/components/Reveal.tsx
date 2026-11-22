@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { content } from '../data/content'
+import { content, asset } from '../data/content'
 
 export default function Reveal() {
   const reduce = useReducedMotion()
@@ -39,6 +39,21 @@ export default function Reveal() {
         <div className="animate-floaty absolute bottom-[14%] right-[12%] text-4xl [animation-delay:.8s]">🎉</div>
         <div className="absolute left-1/2 top-1/2 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-300/30 blur-3xl" />
       </div>
+      {content.reveal.photo && (
+        <motion.div
+          initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6, rotate: -8 }}
+          animate={{ opacity: 1, scale: 1, rotate: -3 }}
+          transition={{ delay: reduce ? 0 : 0.1, type: 'spring', stiffness: 160, damping: 14 }}
+          className="relative mb-6 rounded-[1.75rem] bg-white p-2.5 pb-8 shadow-xl shadow-plum/20"
+        >
+          <img
+            src={asset(content.reveal.photo)}
+            alt={content.friendName}
+            fetchPriority="high"
+            className="h-48 w-40 rounded-[1.25rem] object-cover object-top sm:h-64 sm:w-52"
+          />
+        </motion.div>
+      )}
       <h1 className="relative font-hand leading-[0.95] text-plum">
         <span className="block text-[3.25rem] sm:text-8xl">{letters(line1)}</span>
         <span className="mt-2 block bg-gradient-to-r from-plum via-plum-400 to-gold-600 bg-clip-text text-[4rem] text-transparent sm:text-9xl">

@@ -26,6 +26,8 @@ export const content = {
   reveal: {
     subtitle: 'Another year of you, and the world is better for it.',
     scrollHint: 'Scroll down, there’s more ↓',
+    /** Hero photo shown above "Happy Birthday". '' hides it. */
+    photo: 'photos/hero-01.webp',
   },
 
   /** Optional background music. Put an mp3 in /public/music/ and set the
@@ -37,34 +39,34 @@ export const content = {
     subtitle: 'A few chapters so far (more coming, obviously).',
     memories: [
       {
-        date: '2015', // ✏️ PLACEHOLDER
-        title: 'The day we met',
-        caption: 'Neither of us knew this was the start of something legendary.',
-        photo: '',
+        date: 'May 2023', // EDIT
+        title: 'The early years', // EDIT
+        caption: 'Same smile, slightly smaller face. Some things never change.', // EDIT
+        photo: 'photos/memory-01.webp',
       },
       {
-        date: '2017', // ✏️ PLACEHOLDER
-        title: 'The first road trip',
-        caption: 'Wrong turns, loud music, zero regrets.',
-        photo: '',
+        date: 'Jul 2024', // EDIT
+        title: 'Beach mode: on', // EDIT
+        caption: 'Sunglasses on, waves behind, acting like he owns the coastline.', // EDIT
+        photo: 'photos/memory-02.webp',
       },
       {
-        date: '2019', // ✏️ PLACEHOLDER
-        title: 'That 3 AM conversation',
-        caption: 'Chai, big dreams, and laughing until it hurt.',
-        photo: '',
+        date: 'Dec 2024', // EDIT
+        title: 'Ajrak & brotherhood', // EDIT
+        caption: 'Matching ajrak, matching energy. Sindhi pride, double dose.', // EDIT
+        photo: 'photos/memory-03.webp',
       },
       {
-        date: '2022', // ✏️ PLACEHOLDER
-        title: 'When you had my back',
-        caption: 'You showed up without being asked. I never forgot.',
-        photo: '',
+        date: 'Dec 2025', // EDIT
+        title: 'Sindhi Culture Day', // EDIT
+        caption: 'Topi, ajrak, and a lake view. Main character, no notes.', // EDIT
+        photo: 'photos/memory-04.webp',
       },
       {
-        date: '2026',
-        title: 'Today',
-        caption: 'Still here, still laughing, still the best.',
-        photo: '',
+        date: 'Nov 2026', // EDIT
+        title: 'Lansdowne Bridge, Sukkur', // EDIT
+        caption: 'Five days before his birthday and already posing like a legend.', // EDIT
+        photo: 'photos/memory-05.webp',
       },
     ],
   },
@@ -73,14 +75,17 @@ export const content = {
     title: 'Proof we were there',
     subtitle: 'Tap any photo to look closer.',
     photos: [
-      { photo: '', caption: 'iconic duo' }, // ✏️ PLACEHOLDER captions
-      { photo: '', caption: 'that one wedding' },
-      { photo: '', caption: 'mid-laugh, as always' },
-      { photo: '', caption: 'golden hour' },
-      { photo: '', caption: 'we were so young' },
-      { photo: '', caption: 'chai o’clock' },
-      { photo: '', caption: 'no context needed' },
-      { photo: '', caption: 'best day' },
+      { photo: 'photos/gallery-01.webp', caption: 'still the cutest in the family' }, // EDIT
+      { photo: 'photos/gallery-02.webp', caption: 'blazer era, very serious business' }, // EDIT
+      { photo: 'photos/gallery-03.webp', caption: 'night shoot, headlights on, hero entry' }, // EDIT
+      { photo: 'photos/gallery-04.webp', caption: 'topi on, thoughts deep' }, // EDIT
+      { photo: 'photos/gallery-05.webp', caption: 'partners in crime, black-and-white edition' }, // EDIT
+      { photo: 'photos/gallery-06.webp', caption: 'pool day, zero worries' }, // EDIT
+      { photo: 'photos/gallery-07.webp', caption: 'gazebo king, just chilling' }, // EDIT
+      { photo: 'photos/gallery-08.webp', caption: 'arms crossed = don’t mess with me' }, // EDIT
+      { photo: 'photos/gallery-09.webp', caption: 'city lights, still the brightest thing here' }, // EDIT
+      { photo: 'photos/gallery-10.webp', caption: 'walking into his next chapter' }, // EDIT
+      { photo: 'photos/gallery-11.webp', caption: 'chand dekh raha hai, chand ko' }, // EDIT
     ],
   },
 
